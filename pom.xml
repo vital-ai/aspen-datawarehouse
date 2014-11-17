@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>vital-ai</groupId>
+  <artifactId>aspen-datawarehouse</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  
+  <repositories>
+
+    <repository>
+        <id>vital-public-mvn-repo-snapshots</id>
+        <name>Vital AI Public Maven Repo Snapshots</name>
+        <url>https://github.com/vital-ai/vital-public-mvn-repo/raw/snapshots</url>
+        <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+        </snapshots>
+    </repository>
+
+    <repository>
+        <id>vital-public-mvn-repo-releases</id>
+        <name>Vital AI Public Maven Repo Releases</name>
+        <url>https://github.com/vital-ai/vital-public-mvn-repo/raw/releases/</url>
+    </repository>
+
+</repositories>
+  
+   <properties>
+    <!-- github server corresponds to entry in ~/.m2/settings.xml -->
+    <github.global.server>github</github.global.server>
+</properties>
+ 
+  
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source/>
+          <target/>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>vital-ai</groupId>
+  		<artifactId>aspen</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+</project>
