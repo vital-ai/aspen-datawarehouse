@@ -1,0 +1,11 @@
+The spark-jobserver source code has been copied into common scala directory for easier maven build process.
+
+The packages are:
+
+akka-app/src/ooyala.common.akka/      -> src/main/scala/ooyala/common.akka/
+job-server/src/spark.jobserver/       -> src/main/scala/spark/jobserver/
+job-server-api/src/spark.jobserver/   -> src/main/scala/spark/jobserver/
+
+similarily the resources have been merged:
+
+job-server/src/resources/             -> src/main/resources/
