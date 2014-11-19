@@ -1,0 +1,19 @@
+#!/usr/bin/env groovy
+
+import static groovy.io.FileType.FILES
+
+List jars = [
+	'target/aspen-datawarehouse-0.0.1-SNAPSHOT.jar'
+];
+
+
+def mainClass = 'ai.vital.aspen.datawarehouse.main.AspenDatawarehouseMain'
+
+List cmd = ['java', '-cp', (String)jars.join(File.pathSeparator), mainClass]
+for(String a : args) {
+	cmd.add(a)
+}
+//println cmd
+def process=new ProcessBuilder(cmd).redirectErrorStream(true).start()
+process.inputStream.eachLine {println it}
+
