@@ -1,4 +1,8 @@
-aspen-datawarehouse
+spark-jobserver
 ===================
 
-VitalService Datawarehouse Implementation on Apache Spark
+Largely a fork of: https://github.com/spark-jobserver/spark-jobserver
+
+Copied here for the convenience of integration.
+
+
