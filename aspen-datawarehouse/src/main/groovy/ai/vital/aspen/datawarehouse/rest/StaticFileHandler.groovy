@@ -84,6 +84,8 @@ public class StaticFileHandler implements Handler<HttpServerRequest> {
       if (fileName.contains("..")) {
         // Prevent accessing files outside webroot
         error = 403;
+      } else if(!fileSystem.existsSync(fileName)) {
+	  	error = 404;
       } else if (caching) {
 
         long lastModifiedTime = checkCacheOrFileSystem(fileName);
@@ -174,17 +176,19 @@ public class StaticFileHandler implements Handler<HttpServerRequest> {
         //setResponseHeader(req, Headers.CACHE_CONTROL, "public, max-age=" + cacheMaxAge);
       }
 
-      if (zipped) setResponseHeader(req, Headers.CONTENT_ENCODING, "gzip");
       if (error != 200) {
         sendError(req, error);
+		return
+      }
+      
+      if (zipped) setResponseHeader(req, Headers.CONTENT_ENCODING, "gzip");
+	  
+
+	  if ("HEAD".equals(req.method())) {
+        req.response().end();
       }
       else {
-        if ("HEAD".equals(req.method())) {
-          req.response().end();
-        }
-        else {
-          req.response().sendFile(fileName);
-        }
+        req.response().sendFile(fileName);
       }
 
     } catch (Exception e) {
