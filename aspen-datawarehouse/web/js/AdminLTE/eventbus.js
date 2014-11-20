@@ -7,7 +7,7 @@ var EVENTBUS_CONNECT = "EVENTBUS_CONNECT";
 
 eb.onopen = function() {
 	
-	console.log("Event bus connected, checking session...");
+	console.log("Event bus connected");
 	
 	$(document).trigger(EVENTBUS_CONNECT);
 	
@@ -22,6 +22,28 @@ function eventbus_jobs_list(successCB, errorCB) {
 	eb.send('jobs.list', {}, function(result) {
 		
 		console.log("eventbus_jobs_list response: ", result);
+		
+		if( result.status == 'ok' ) {
+		
+			successCB(result);
+		
+		} else {
+			
+			errorCB(result.message);
+			
+		}
+		
+	});
+	
+}
+
+function eventbus_jars_list(successCB, errorCB) {
+	
+	console.log('eventbus_jars_list');
+	
+	eb.send('jars.list', {}, function(result) {
+		
+		console.log("eventbus_jars_list response: ", result);
 		
 		if( result.status == 'ok' ) {
 		

@@ -1,0 +1,40 @@
+@@@ templates/head.html | {"TITLE": "Jars", "ICON": "fa-code", "SUBTITLE": "Jars"} @@@
+
+<!-- Main row -->
+<div class="row">
+  <div class="col-md-6">
+  
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Uploaded jars</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body no-padding">
+        <table id="jars-list" class="table table-striped">
+          <tr>
+            <th style="width: 10px">#</th>
+            <th>Name</th>
+            <th>Filename</th>
+            <th>Upload Time</th>
+            <th>Size</th>
+          </tr>
+          <!-- TEMPLATE ROW -->
+          <tr id="jar-template" style="display: none;">
+            <td class="jar-index">#</td>
+            <td class="jar-name"></td>
+            <td class="jar-file-name"></td>
+            <td class="jar-upload-time"></td>
+            <td class="jar-size"></td>
+          </tr>
+        </table>
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+    
+  </div><!-- /.col -->
+</div><!-- /.row (main row) -->
+
+@@@ templates/foot.html @@@
+
+    <script src="js/pages/jars.js" type="text/javascript"></script>
+
+  </body>
+</html>
