@@ -4,7 +4,7 @@
   <artifactId>aspen-datawarehouse</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>aspen datawarehouse</name>
-
+  <packaging>jar</packaging>
 
 <repositories>
 
@@ -34,21 +34,68 @@
 
 
 
-
+<build>
+    <plugins>
+	  <!-- assembly -->      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+    </plugins>
+  </build>
 
 
 
 
    <dependencies>
+    <!-- 
    	<dependency>
    		<groupId>vital-ai</groupId>
    		<artifactId>aspen-jobserver</artifactId>
    		<version>0.0.1-SNAPSHOT</version>
+   		<scope>provided</scope>
    	</dependency>
    	<dependency>
    		<groupId>vital-ai</groupId>
    		<artifactId>aspen</artifactId>
    		<version>0.0.1-SNAPSHOT</version>
    	</dependency>
+   	-->
+    <dependency>
+    	<groupId>com.typesafe</groupId>
+    	<artifactId>config</artifactId>	
+    	<version>1.0.0</version>	
+    </dependency>
+    <dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>2.1</version>
+	</dependency>
+    
+    
+    <dependency>
+		<groupId>io.vertx</groupId>
+		<artifactId>vertx-platform</artifactId>
+		<version>2.1.5</version>
+    </dependency>
+    <dependency>
+		<groupId>io.vertx</groupId>
+		<artifactId>lang-groovy</artifactId>
+		<version>2.1.1-final</version>
+    </dependency>
    </dependencies>
 </project>
