@@ -31,8 +31,8 @@ function onJobsListReady(result) {
 
 }
 
-function onJobsListError(message) {
-  alert(message);
+function onJobsListError(status, message) {
+  alert(status + ' - ' + message);
 }
 
 function handleJobsList(tableEl, jobs) {

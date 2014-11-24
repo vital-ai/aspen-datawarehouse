@@ -42,7 +42,10 @@ public class WebServer extends WebServerBase {
     
 	//all html pages are template based!
 	
+	REST_JarsHandler jarsHandler = new REST_JarsHandler()
 	
+	//same as file upload
+	matcher.allWithRegEx("\\/jars\\/.*", jarsHandler);
 	
 	matcher.get("/", htmlTemplatePageHandler);
 	
