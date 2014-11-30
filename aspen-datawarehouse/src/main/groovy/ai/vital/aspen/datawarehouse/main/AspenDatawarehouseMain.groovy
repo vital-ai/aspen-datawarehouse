@@ -1,5 +1,6 @@
 package ai.vital.aspen.datawarehouse.main
 
+import ai.vital.aspen.datawarehouse.mock.MockDao;
 import ai.vital.aspen.datawarehouse.rest.WebServer;
 
 import com.typesafe.config.Config
@@ -36,6 +37,10 @@ class AspenDatawarehouseMain {
 		
 		Config webServerCfg = config.getConfig("webserver")
 	
+		Config daoConfig = config.getConfig("mockdao");
+		
+		MockDao.init(daoConfig)
+		
 		platformManager.deployVerticle(WebServer.class.getCanonicalName(), new JsonObject(webServerCfg.root().unwrapped()), new URL[0], 1, null, new AsyncResultHandler<String>() {
 			public void handle(AsyncResult<String> asyncResult) {
 				if (asyncResult.succeeded()) {

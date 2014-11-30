@@ -177,11 +177,22 @@ public abstract class WebServerBase extends BusModBase {
 	//TODO register handlers here!
 
 	JobsHandler jobsHandler = new JobsHandler(vertx)
+	JarsHandler jarsHandler = new JarsHandler(vertx)
 
   	vertx.eventBus().registerHandler("jobs.list") { Message<JsonObject> msg ->
-	  jobsHandler.handleListJobs(msg)
+		jobsHandler.handleListJobs(msg)
+	}
+	  
+	vertx.eventBus().registerHandler("jars.list") { Message<JsonObject> msg ->
+		jarsHandler.handleListJars(msg)
+	}
+	
+	vertx.eventBus().registerHandler("jars.delete") { Message<JsonObject> msg ->
+		jarsHandler.handleDeleteJar(msg)
 	}
 
+	  
+	  
   }
 
   /**

@@ -29,7 +29,7 @@ function eventbus_jobs_list(successCB, errorCB) {
 		
 		} else {
 			
-			errorCB(result.message);
+			errorCB(result.status, result.message);
 			
 		}
 		
@@ -51,7 +51,31 @@ function eventbus_jars_list(successCB, errorCB) {
 		
 		} else {
 			
-			errorCB(result.message);
+			errorCB(result.status, result.message);
+			
+		}
+		
+	});
+	
+}
+
+function eventbus_jars_delete(name, successCB, errorCB) {
+	
+	var data = {name: name};
+	
+	console.log('eventbus_jars_delete', data);
+	
+	eb.send('jars.delete', data, function(result) {
+		
+		console.log("eventbus_jars_delete response: ", result);
+		
+		if( result.status == 'ok' ) {
+			
+			successCB(result);
+			
+		} else {
+			
+			errorCB(result.status, result.message);
 			
 		}
 		
