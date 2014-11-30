@@ -7,6 +7,18 @@ class SparkVitalServiceImpl {
   
   // Manages N Data Collections
   
+  // Manages N Models
+  
+  // Manages N Named RDDs
+  
+  // Manages N Contexts
+  
+  // Manages N Jobs (Job Templates available to run)
+  
+  // Manages N Jobs (Running Jobs, Job History)
+  
+  // Manages N Jars
+  
   
   // callFunction
   
@@ -27,31 +39,33 @@ class SparkVitalServiceImpl {
   // selectQuery
   
   
+  // graphQuery
+  
+  
   // generateURI
   
   // addSegment
   
   // removeSegment
   
+  // list segments
+  
+  
+  
   
   // sendFlumeEvent (sendEvent --> Spark Streaming)
   
+  // sendFlumeEvents (Spark Streaming)
   
-  // sendFlumeEvents
+  // uploadFile (hdfs)
   
+  // downloadFile (hdfs)
   
-  // uploadFile
+  // fileExists (hdfs)
   
-  // downloadFile
-  
-  // fileExists
-  
-  // deleteFile
+  // deleteFile (hdfs)
   
   // ping
-  
-  
-  
   
   
   
