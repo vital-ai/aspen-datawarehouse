@@ -1,5 +1,5 @@
 package ai.vital.aspen.datawarehouse.dc
 
-class NQuadsCollection {
+class NQuadsCollection extends DataCollection {
 
 }

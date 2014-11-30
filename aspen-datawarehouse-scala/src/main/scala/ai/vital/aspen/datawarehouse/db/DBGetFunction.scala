@@ -1,5 +1,5 @@
 package ai.vital.aspen.datawarehouse.db
 
-class DBGetFunction {
+class DBGetFunction extends DBFunction {
 
 }

@@ -1,5 +1,5 @@
 package ai.vital.aspen.datawarehouse.dc
 
-class CSVCollection {
+class CSVCollection extends DataCollection {
 
 }

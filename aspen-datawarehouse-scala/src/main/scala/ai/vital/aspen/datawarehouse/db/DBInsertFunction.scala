@@ -1,5 +1,5 @@
 package ai.vital.aspen.datawarehouse.db
 
-class DBInsertFunction {
+class DBInsertFunction extends DBFunction {
 
 }
