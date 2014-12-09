@@ -10,8 +10,11 @@ import java.util.Map
 import java.util.Set
 
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.SerializationUtils;
 import org.vertx.java.core.Handler
+import org.vertx.java.core.buffer.Buffer
 import org.vertx.java.core.http.HttpServerRequest
+import org.vertx.java.core.http.HttpServerResponse
 
 import ai.vital.aspen.datawarehouse.service.AbstractHandler
 import ai.vital.endpoint.EndpointType
@@ -112,8 +115,90 @@ return os;
 	*/
 	
 	@Override
-	public void handle(HttpServerRequest arg0) {
-		// TODO Auto-generated method stub
+	public void handle(HttpServerRequest req) {
+
+		String contentType = req.headers().get("Content-Type");
+		
+		final HttpServerResponse resp = req.response()
+		
+		try {
+			
+			if(contentType != "application/x-java-serialized-object") {
+				resp.setStatusCode(415).end("Supports application/x-java-serialized-object only")
+				return
+			}
+			
+			req.bodyHandler(new Handler<Buffer>(){
+				
+				void handle( Buffer buffer){
+			
+					ByteArrayInputStream bis = new ByteArrayInputStream(buffer.getBytes())
+					
+					
+					ObjectInputStream inputRequest = null;
+					
+					Map<String, Object> input = null;
+					
+					try {
+						inputRequest = new ObjectInputStream(bis);
+			
+						input = (Map<String, Object>) inputRequest.readObject();
+						
+					} catch (Exception e) {
+						resp.setStatusCode(422).end(e.getLocalizedMessage());
+					} finally {
+						IOUtils.closeQuietly(inputRequest);
+					}
+					
+					
+					Object toSerialize = null;
+					
+					try {
+						Object output = handle_vs(input);
+						toSerialize = output;
+					} catch (VitalServiceException e) {
+						toSerialize = new VitalServiceException(e.getLocalizedMessage());
+					} catch (VitalServiceUnimplementedException e) {
+						toSerialize = new VitalServiceException(e.getLocalizedMessage());
+					} catch(Exception e) {
+						throw resp.setStatusCode(500).end(e.localizedMessage);
+					}
+			
+					
+					resp.end(new Buffer(SerializationUtils.serialize(toSerialize)))
+					
+					
+					/*
+					final Object o = toSerialize;
+					
+					OutputRepresentation os = new OutputRepresentation(MediaType.APPLICATION_JAVA_OBJECT) {
+						
+						@Override
+						public void write(OutputStream arg0) throws IOException {
+							ObjectOutputStream oos = new ObjectOutputStream(arg0);
+							oos.writeObject(o);
+						}
+					};
+			
+					return os;
+					*/
+							
+				}
+				
+			});
+		
+			/*
+			req.exceptionHandler(new Handler<Throwable>(){
+				
+				void handler(Throwable thr) {
+					re
+				}
+				
+			});
+			*/
+		} catch(Exception e) {
+			resp.setStatusCode(500).end(e.localizedMessage)
+		}
 		
 	}
 
@@ -281,6 +366,7 @@ return os;
 				if("ping".equals(method)) {
 					
 					//return service.ping();
+					return VitalStatus.withOKMessage("Aspen REST service is up")
 					
 				}
 				

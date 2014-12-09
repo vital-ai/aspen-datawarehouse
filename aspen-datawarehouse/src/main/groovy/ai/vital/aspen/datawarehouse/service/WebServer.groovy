@@ -19,7 +19,7 @@ public class WebServer extends WebServerBase {
 	REST_VitalServiceHandler vsHandler = new REST_VitalServiceHandler()
 	
 	//same as file upload
-	matcher.allWithRegEx("\\/java\\/.*", vsHandler);
+	matcher.allWithRegEx("\\/java\\/?.*", vsHandler);
 	
 	matcher.get("/", htmlTemplatePageHandler);
 	
@@ -30,5 +30,6 @@ public class WebServer extends WebServerBase {
 	matcher.noMatch(staticHandler());
 	
 	return matcher;
+	
   }
 }

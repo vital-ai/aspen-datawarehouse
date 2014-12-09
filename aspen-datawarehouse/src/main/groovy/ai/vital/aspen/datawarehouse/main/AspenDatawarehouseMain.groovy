@@ -1,7 +1,7 @@
 package ai.vital.aspen.datawarehouse.main
 
 import ai.vital.aspen.datawarehouse.mock.MockDao;
-import ai.vital.aspen.datawarehouse.rest.WebServer;
+import ai.vital.aspen.datawarehouse.service.WebServer;
 
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
