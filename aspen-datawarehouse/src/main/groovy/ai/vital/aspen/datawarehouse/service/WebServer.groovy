@@ -18,7 +18,7 @@ public class WebServer extends WebServerBase {
 	
 	REST_VitalServiceHandler vsHandler = new REST_VitalServiceHandler()
 	
-	//same as file upload
+	
 	matcher.allWithRegEx("\\/java\\/?.*", vsHandler);
 	
 	matcher.get("/", htmlTemplatePageHandler);

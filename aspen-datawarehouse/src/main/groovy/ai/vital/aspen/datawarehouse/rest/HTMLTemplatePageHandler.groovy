@@ -185,7 +185,6 @@ public class HTMLTemplatePageHandler implements Handler<HttpServerRequest> {
 		bytesLength = content.getBytes("UTF-8").length;
 	    
 	    request.response().putHeader(Headers.CONTENT_LENGTH, "" + bytesLength).putHeader(Headers.CONTENT_TYPE, "text/html;charset=UTF-8").write(content, "UTF-8").end();
-//		/nycschools-vertx/web/index._html		
 		
 	}
 

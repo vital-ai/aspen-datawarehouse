@@ -2,14 +2,63 @@
 
 import static groovy.io.FileType.FILES
 
-List jars = [
-	'target/aspen-datawarehouse-0.0.1-SNAPSHOT.jar'
-];
 
+String VITAL_HOME = System.getenv('VITAL_HOME')
+
+List jars = [
+	'target/aspen-datawarehouse-0.0.1-SNAPSHOT.jar',
+	VITAL_HOME + '/vitalsigns/command/VitalSigns-0.1.0.jar', 
+	VITAL_HOME + '/vital-domain/VitalDomain-groovy-0.1.0.jar']
+	
+
+
+new File(VITAL_HOME, 'vitalsigns/lib').eachFileRecurse(FILES) {
+	if(it.name.endsWith('.jar')) {
+		String a = it.absolutePath;
+		jars.add(a)
+	}
+}
+
+new File(VITAL_HOME, "domain-groovy-jar").eachFile(FILES) {
+	if(it.name.endsWith(".jar")) {
+		println "using domain jar: ${it.absolutePath}"
+		jars.add(it.absolutePath)
+	}
+}
+
+
+new File(VITAL_HOME, "vital-lucene").eachFileRecurse(FILES) {
+	if(it.name.endsWith(".jar")) {
+		jars.add(it.absolutePath)
+	}
+}
+
+
+
+
+new File(VITAL_HOME, "vitalservice").eachFileRecurse(FILES) {
+	if(it.name.endsWith(".jar")) {
+		jars.add(it.absolutePath)
+	}
+}
+
+// this is a hack to remove the extra groovy-all from the path
+
+List newjars = []
+
+for(j in jars) {
+
+if(!j.contains("groovy-all-2.3.6.jar")) {
+
+	newjars.add(j)
+
+}
+
+}
 
 def mainClass = 'ai.vital.aspen.datawarehouse.main.AspenDatawarehouseMain'
 
-List cmd = ['java', '-cp', (String)jars.join(File.pathSeparator), mainClass]
+List cmd = ['java', '-cp', (String)newjars.join(File.pathSeparator), mainClass]
 for(String a : args) {
 	cmd.add(a)
 }

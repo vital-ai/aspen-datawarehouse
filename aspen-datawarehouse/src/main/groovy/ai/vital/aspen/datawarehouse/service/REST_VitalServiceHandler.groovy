@@ -135,31 +135,35 @@ return os;
 					ByteArrayInputStream bis = new ByteArrayInputStream(buffer.getBytes())
 					
 					
-					ObjectInputStream inputRequest = null;
+					ObjectInputStream inputRequest = null
 					
-					Map<String, Object> input = null;
+					Map<String, Object> input = null
 					
 					try {
-						inputRequest = new ObjectInputStream(bis);
+						inputRequest = new ObjectInputStream(bis)
 			
-						input = (Map<String, Object>) inputRequest.readObject();
+						input = (Map<String, Object>) inputRequest.readObject()
 						
 					} catch (Exception e) {
-						resp.setStatusCode(422).end(e.getLocalizedMessage());
+						resp.setStatusCode(422).end(e.getLocalizedMessage())
 					} finally {
-						IOUtils.closeQuietly(inputRequest);
+						IOUtils.closeQuietly(inputRequest)
 					}
 					
 					
-					Object toSerialize = null;
+					Object toSerialize = null
 					
 					try {
-						Object output = handle_vs(input);
-						toSerialize = output;
+						
+						Object output = handle_vs(input)
+						
+						toSerialize = output
+						
+						
 					} catch (VitalServiceException e) {
-						toSerialize = new VitalServiceException(e.getLocalizedMessage());
+						toSerialize = new VitalServiceException(e.getLocalizedMessage())
 					} catch (VitalServiceUnimplementedException e) {
-						toSerialize = new VitalServiceException(e.getLocalizedMessage());
+						toSerialize = new VitalServiceException(e.getLocalizedMessage())
 					} catch(Exception e) {
 						throw resp.setStatusCode(500).end(e.localizedMessage);
 					}
@@ -212,7 +216,7 @@ return os;
 				Map<String, Object> params = (Map<String, Object>) input.get("params");
 				
 				Customer c = null;
-				
+				/*
 				
 				if(customerID != null) {
 					
@@ -227,13 +231,16 @@ return os;
 					
 					
 				}
+				*/
 				
+				/*
 				if( customerID != null && ! service.getCustomer().getID().equals(customerID) ) {
 		
 					throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "Invalid 'customer' parameter - " + customerID + " - this prime instance supports " + service.getCustomer().getID() + " only.");
 					
 				}
-		
+		*/
+				
 				App a = null;
 				
 				if(appID != null) {
@@ -364,7 +371,7 @@ return os;
 		
 				
 				if("ping".equals(method)) {
-					
+										
 					//return service.ping();
 					return VitalStatus.withOKMessage("Aspen REST service is up")
 					
